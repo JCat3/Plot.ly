@@ -2,6 +2,25 @@
 console.log("This is plots.js");
 
 
+function DrawBarchart(sampleId) {
+    console.log('DrawBarchart(${sampleId})');
+}
+
+function DrawBubblechart(sampleId) {
+    console.log('DrawBubblechart(${sampleId})');
+}
+
+function optionChanged(id) {
+    console.log('optionChanged(${id})');
+
+    DrawBarchart(id);
+    DrawBubblechart(id);
+    ShowMetaData(id);
+
+    // display barchart
+    //display bubble chart 
+    //populate demographic data
+}
 
 
 function InitDashboard()
@@ -16,13 +35,20 @@ function InitDashboard()
 
         let sampleNames = data.names;
 
-        sampleNames.array.forEach(sampleId => {
+        sampleNames.forEach(sampleId => {
             selector.append("option")
                 .text(sampleId)
                 .property("value", sampleId)
-
         });
+
+        let sampleId = sampleNames[0];
+
+        DrawBarchart(sampleId);
+        DrawBubblechart(sampleId);
+        ShowMetadata(sampleId);
     });
+
+
 }
 InitDashboard();
 
