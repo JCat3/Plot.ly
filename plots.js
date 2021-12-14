@@ -70,8 +70,7 @@ function DrawBubblechart(sampleId) {
                 colorscale: 'Blues',
                 colorbar: {
                     title: 'Cultures',
-                },
-            hoverinfo: sample_values
+                }
             }
 
         }
@@ -80,10 +79,9 @@ function DrawBubblechart(sampleId) {
 
         let bubbleLayout = {
             title: "Bacteria Cultures Per Sample",
-            margin: { t: 100, l: 350},
+            margin: { t: 100, l: 50},
             showlegend: false,
             xaxis:{title: "OTU ID"}
-            
         }
 
         Plotly.newPlot("bubble", bubbleArray, bubbleLayout);
@@ -96,14 +94,17 @@ function ShowMetadata(sampleId) {
     d3.json("samples.json").then(data => {
        
         let metadata = data.metadata;
-        let resultArray = samples.filter(s => s.id === sampleId);
+        let resultArray = metadata.filter(s => s.id === sampleId);
         let result = resultArray[0];
 
-        console.log(metadata);
+        console.log("result", result);
 
-        Plotly.newPlot("panel-title", result)
+        let metaData = d3.select("#sample-metadata")
+        metaData.append('div').text(result)
 
     });
+
+
 }
 
 function optionChanged(id) {
