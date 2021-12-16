@@ -94,25 +94,26 @@ function ShowMetadata(sampleId) {
     d3.json("samples.json").then(data => {
        
         let metadata = data.metadata;
-        let resultArray = metadata.filter(s => s.id === sampleId);
+        let resultArray = metadata.filter(s => s.id == sampleId);
         let result = resultArray[0];
 
-        console.log("result", result);
+        let metaData = d3.select("#sample-metadata");
+        
+        metaData.html('');
 
-        let metaData = d3.select("#sample-metadata")
-        metaData.append('div').text(result)
-
+        Object.entries(result).forEach(([x,y]) => {
+            metaData.append('p').text(`${x}: ${y}`)
+        });
     });
 
-
-}
+};
 
 function optionChanged(id) {
     console.log(`optionChanged(${id})`);
 
     DrawBarchart(id);
     DrawBubblechart(id);
-    ShowMetaData(id);
+    ShowMetadata(id);
 
     // display barchart
     //display bubble chart 
